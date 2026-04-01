@@ -7,16 +7,11 @@ from pathlib import Path
 @click.option('--artist', '-a', help='Artist Name')
 @click.option('--album', '-A', help='Album Name')
 @click.option('--title', '-t', help='Song Title')
-@click.option('--track', '-T', help='Track Number')
+@click.option('--tracktotal', '-T', help='Total number of tracks on an album.')
+@click.option('--tracknum', '-n', help='Track number for the specified file.')
 @click.option('--cover', '-c', help='Set "Cover image" to true. Only use this if you have a cover image called `Cover.jpg` in the same directory as your mp3 file.', is_flag=True)
 @click.option('filename', '-f', help='Add filename(s). If no file names are provided, the script will assume the current directory contains mp3 files from the same album.', multiple=True)
-def command(artist, album, title, track, cover, filename):
-	print(artist)
-	print(album)
-	print(title)
-	print(track)
-	print(cover)
-	print(filename)
+def command(artist, album, title, tracktotal, tracknum, cover, filename):
 	if len(filename) != 0:
 		for f in filename:
 			mp3file = eyed3.load(f)
@@ -30,8 +25,8 @@ def command(artist, album, title, track, cover, filename):
 				mp3file.tag.album = f"{album}"
 			if title != None:
 				mp3file.tag.title = f"{title}"
-			if track != None:
-				mp3file.tag.track_num = f"{track}"
+			if tracknum != None:
+				mp3file.tag.track_num = (int(tracknum), int(tracktotal))
 			mp3file.tag.save()
 	else:
 		total = input(f"What is the total number of tracks for {album}: ")
