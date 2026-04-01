@@ -8,8 +8,8 @@ from pathlib import Path
 @click.option('--album', '-A', help='Album Name')
 @click.option('--title', '-t', help='Song Title')
 @click.option('--track', '-T', help='Track Number')
-@click.option('--cover', '-c', help='Set "Cover image" to true', is_flag=True)
-@click.option('filename', '-f', help='Add filename(s)', multiple=True)
+@click.option('--cover', '-c', help='Set "Cover image" to true. Only use this if you have a cover image called `Cover.jpg` in the same directory as your mp3 file.', is_flag=True)
+@click.option('filename', '-f', help='Add filename(s). If no file names are provided, the script will assume the current directory contains mp3 files from the same album.', multiple=True)
 def command(artist, album, title, track, cover, filename):
 	print(artist)
 	print(album)
